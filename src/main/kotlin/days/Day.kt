@@ -2,7 +2,7 @@ package days
 
 interface Day {
     fun printHeader(): Day {
-        println("\nSolutions for " + javaClass.name + "\n---------------------")
+        println("\nSolutions for " + javaClass.simpleName + "\n---------------------")
         return this
     }
 
