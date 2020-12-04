@@ -21,7 +21,7 @@ class Day2 : Day {
             count >= policy.min && count <= policy.max
         }.count()
 
-        println("Part one: $valid")
+        println("Part 1: $valid")
 
         return this
     }
@@ -40,7 +40,7 @@ class Day2 : Day {
             counter == 1
         }.count()
 
-        println("Part two: $valid")
+        println("Part 2: $valid")
 
         return this
     }

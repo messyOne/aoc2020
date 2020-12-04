@@ -9,7 +9,7 @@ class Day1 : Day {
         for (x in data) {
             for (y in data) {
                 if (x + y == 2020) {
-                    println("Part one: " + x * y)
+                    println("Part 1: " + x * y)
                     return this
                 }
             }
@@ -23,7 +23,7 @@ class Day1 : Day {
             for (y in data) {
                 for (z in data) {
                     if (x + y + z == 2020) {
-                        println("Part two: " + x * y * z)
+                        println("Part 2: " + x * y * z)
                         return this
                     }
                 }
