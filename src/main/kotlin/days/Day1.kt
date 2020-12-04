@@ -8,11 +8,9 @@ class Day1 : Day {
     override fun executePart1() : Day {
         for (x in data) {
             for (y in data) {
-                for (z in data) {
-                    if (x + y == 2020) {
-                        println("Part one: " + x * y)
-                        return this
-                    }
+                if (x + y == 2020) {
+                    println("Part one: " + x * y)
+                    return this
                 }
             }
         }
