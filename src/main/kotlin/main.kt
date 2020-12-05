@@ -1,17 +1,15 @@
-import days.Day1
-import days.Day2
-import days.Day3
-import days.Day4
+import days.*
 
 fun main() {
     listOf(
-        Day1(),
-        Day2(),
-        Day3(),
-        Day4()
+//        Day1(),
+//        Day2(),
+//        Day3(),
+//        Day4(),
+        Day5()
     ).forEach { it
         .printHeader()
         .executePart1()
-        .executePart2()
+//        .executePart2()
     }
 }
