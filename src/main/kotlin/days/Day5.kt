@@ -1,6 +1,7 @@
 package days
 
 import java.io.File
+import kotlin.math.abs
 
 class Day5 : Day {
     private val data: List<List<Char>> =
@@ -15,9 +16,7 @@ class Day5 : Day {
         var topSeat = 0
 
         data.map { line ->
-            val row = traverse(line, 0, MIN_ROW, MAX_ROW)
-            val column = traverse(line.takeLast(3), 0, MIN_COL, MAX_COL)
-            val seatId = row * 8 + column
+            val seatId = getSeatId(line)
 
             if (seatId > topSeat) {
                 topSeat = seatId
@@ -27,6 +26,32 @@ class Day5 : Day {
         println("Part 1: $topSeat")
 
         return this
+    }
+
+    override fun executePart2(): Day {
+        val allSeats = (0..127*8+7).toMutableList()
+
+        data.map { line ->
+            val seatId = getSeatId(line)
+
+            allSeats.remove(seatId)
+        }
+
+        for (i in 0..allSeats.size-2) {
+            if (allSeats[i+1] - allSeats[i] > 1) {
+                println("Part 2: " + allSeats[i+1])
+                break
+            }
+        }
+
+        return this
+    }
+
+    private fun getSeatId(line: List<Char>): Int {
+        val row = traverse(line, 0, MIN_ROW, MAX_ROW)
+        val column = traverse(line.takeLast(3), 0, MIN_COL, MAX_COL)
+        val seatId = row * 8 + column
+        return seatId
     }
 
     private fun traverse(line: List<Char>, pointer: Int, min: Int, max: Int): Int {
@@ -43,9 +68,5 @@ class Day5 : Day {
             'B', 'R' -> traverse(line, pointer + 1, center+1, max) // +1 correct or should be taken into consideration in center calc
             else -> throw IllegalArgumentException(line[pointer].toString())
         }
-    }
-
-    override fun executePart2(): Day {
-        TODO("Not yet implemented")
     }
 }
