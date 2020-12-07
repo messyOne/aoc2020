@@ -1,7 +1,6 @@
 package days
 
 import java.io.File
-import kotlin.math.abs
 
 class Day5 : Day {
     private val data: List<List<Char>> =

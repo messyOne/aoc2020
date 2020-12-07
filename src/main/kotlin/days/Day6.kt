@@ -2,9 +2,9 @@ package days
 
 import java.io.File
 
-data class Answer(val answerString: String, val persons: Int)
-
 class Day6 : Day {
+    data class Answer(val answerString: String, val persons: Int)
+
     private val answers: MutableList<Answer> = mutableListOf()
 
     init {
