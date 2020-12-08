@@ -32,7 +32,7 @@ class Day8 : Day {
                 return this
             }
 
-            executeOperation()
+            executeOperations()
         }
 
         return this
@@ -42,8 +42,11 @@ class Day8 : Day {
         reset()
 
         while (pointer < operations.size) {
-            repair()
-            executeOperation()
+            if (handledInstructions.contains(pointer)) {
+                tryFixingIt()
+            }
+
+            executeOperations()
         }
 
         println("Part 2: $accumulator")
@@ -51,31 +54,29 @@ class Day8 : Day {
         return this
     }
 
-    private fun repair() {
-        if (handledInstructions.contains(pointer)) {
-            if (lastModificationPointer != -1) {
-                if (operations[lastModificationPointer].instruction == "nop") {
-                    operations[lastModificationPointer].instruction = "jmp"
-                } else {
-                    operations[lastModificationPointer].instruction = "nop"
-                }
+    private fun tryFixingIt() {
+        if (lastModificationPointer != -1) {
+            if (operations[lastModificationPointer].instruction == "nop") {
+                operations[lastModificationPointer].instruction = "jmp"
+            } else {
+                operations[lastModificationPointer].instruction = "nop"
             }
-
-            for (i in lastModificationPointer + 1 until operations.size) {
-                if (listOf("nop", "jmp").contains(operations[i].instruction)) {
-                    lastModificationPointer = i
-
-                    if (operations[i].instruction == "nop") {
-                        operations[i].instruction = "jmp"
-                    } else {
-                        operations[i].instruction = "nop"
-                    }
-                    break
-                }
-            }
-
-            reset()
         }
+
+        for (i in lastModificationPointer + 1 until operations.size) {
+            if (listOf("nop", "jmp").contains(operations[i].instruction)) {
+                lastModificationPointer = i
+
+                if (operations[i].instruction == "nop") {
+                    operations[i].instruction = "jmp"
+                } else {
+                    operations[i].instruction = "nop"
+                }
+                break
+            }
+        }
+
+        reset()
     }
 
     private fun reset() {
@@ -84,7 +85,7 @@ class Day8 : Day {
         handledInstructions.clear()
     }
 
-    private fun executeOperation() {
+    private fun executeOperations() {
         handledInstructions.add(pointer)
 
         when (operations[pointer].instruction) {
