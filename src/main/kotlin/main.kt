@@ -2,14 +2,15 @@ import days.*
 
 fun main() {
     listOf(
-        Day1(),
-        Day2(),
-        Day3(),
-        Day4(),
-        Day5(),
-        Day6(),
-        Day7(),
-        Day8()
+//        Day1(),
+//        Day2(),
+//        Day3(),
+//        Day4(),
+//        Day5(),
+//        Day6(),
+//        Day7(),
+//        Day8(),
+        Day9()
     ).forEach { it
         .printHeader()
         .executePart1()
