@@ -2,6 +2,7 @@ package days
 
 import domain.Instruction
 import domain.DirectNavigation
+import domain.WaypointNavigation
 import java.io.File
 import kotlin.math.abs
 
@@ -17,7 +18,11 @@ class Day12 : Day {
     }
 
     override fun executePart2(): Day {
-        TODO("Not yet implemented")
+        val result = WaypointNavigation.calculate(data)
+
+        println("Part 2: " + (abs(result.north) + abs(result.east)))
+
+        return this
     }
 
 }

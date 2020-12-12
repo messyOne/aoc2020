@@ -61,3 +61,53 @@ object DirectNavigation {
         }
     }
 }
+
+object WaypointNavigation {
+    var wNorth = 1
+    var wEast = 10
+
+    var sNorth = 0
+    var sEast = 0
+
+    fun calculate(data : List<Instruction>): Result {
+        data.forEach { instruction ->
+            handleDirections(instruction.type, instruction.amount)
+
+            when (instruction.type) {
+                'F' -> {
+                    sNorth += instruction.amount * wNorth
+                    sEast += instruction.amount * wEast
+                }
+                'R' -> {
+                    val steps = instruction.amount/90
+
+                    for (i in 1..steps) {
+                        val n = wNorth
+                        wNorth = -wEast
+                        wEast = n
+                    }
+                }
+                'L' -> {
+                    val steps = instruction.amount/90
+
+                    for (i in 1..steps) {
+                        val n = wNorth
+                        wNorth = wEast
+                        wEast = -n
+                    }
+                }
+            }
+        }
+
+        return Result(sNorth, sEast)
+    }
+
+    private fun handleDirections(type: Char, amount: Int) {
+        when (type) {
+            'N' -> wNorth += amount
+            'S' -> wNorth -= amount
+            'W' -> wEast -= amount
+            'E' -> wEast += amount
+        }
+    }
+}
