@@ -23,6 +23,20 @@ class Day13 : Day {
     }
 
     override fun executePart2(): Day {
-        TODO("Not yet implemented")
+        val busses = data.last().split(',').withIndex().filter { pair -> pair.value != "x" }.map { indexedValue -> indexedValue.value.toLong() to indexedValue.index.toLong() }
+
+        var t = 0L
+        var step = busses.first().first
+
+        busses.drop(1).forEach { pair ->
+            while ((t + pair.second) % pair.first != 0L) {
+                t += step
+            }
+            step *= pair.first
+        }
+
+        println("Part 2: $t")
+
+        return this
     }
 }
