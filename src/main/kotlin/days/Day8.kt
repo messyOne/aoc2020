@@ -28,7 +28,7 @@ class Day8 : Day {
     override fun executePart1(): Day {
         while (pointer < operations.size) {
             if (handledInstructions.contains(pointer)) {
-                println("Part 1: $accumulator ($pointer)")
+                println("Part 1: $accumulator")
                 return this
             }
 

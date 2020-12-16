@@ -76,6 +76,61 @@ class Day16 : Day {
     }
 
     override fun executePart2(): Day {
-        TODO("Not yet implemented")
+        val allValid = nearby.filter { list ->
+            list.all { i ->
+                rules.any { rule -> rule.isValid(i) }
+            }
+        } + listOf(own)
+
+        val map = mutableMapOf<Int, MutableList<String>>()
+
+        rules.forEach { rule ->
+            for (i in own.indices) {
+                val isValid = allValid.all { list ->
+                    rule.isValid(list[i])
+                }
+
+                if (isValid) {
+                    if (!map.containsKey(i+1)) {
+                        map[i+1] = mutableListOf()
+                    }
+
+                    map[i+1]!!.add(rule.type)
+                }
+            }
+        }
+
+        val finalMap = mutableMapOf<Int, String>()
+
+        fun traverse(map: MutableMap<Int, MutableList<String>>) {
+            val new = mutableMapOf<Int, MutableList<String>>()
+
+            map.filter { (i, list) ->
+                if (list.size == 1) {
+                    finalMap[i] = list.first()
+                }
+
+                list.size > 1
+            }.forEach { (i, list) ->
+                new[i] = list.filter { s -> !finalMap.values.contains(s) }.toMutableList()
+            }
+
+            if (new.isNotEmpty()) {
+                traverse(new)
+            }
+        }
+
+        traverse(map)
+
+        var total = 1L
+        finalMap.forEach { (i, s) ->
+            if (s.contains("departure")) {
+                total *= own[i-1]
+            }
+        }
+
+        println("Part 2: $total")
+
+        return this
     }
 }
