@@ -3,19 +3,6 @@ package days
 import java.io.File
 
 class Day15 : Day {
-//    data class Number(val value: Int, var counter: Int = 0, var lastTurn: Int = 0, var turnBeforeLastTurn: Int = 0) {
-//
-//    }
-
-//    private val data = mutableMapOf<Int, Number>()
-
-    init {
-//        File("src/main/resources/data15.txt").forEachLine { line ->
-//            line.split(',').forEachIndexed { index, s: String ->
-//                data[s.toInt()] = Number(s.toInt(), lastTurn = index + 1)
-//            }
-//        }
-    }
     private val data = File("src/main/resources/data15.txt").useLines { it.toList() }.flatMap { s: String -> s.split(',').map { it.toInt() } }
 
 
