@@ -2,7 +2,7 @@ package days
 
 import java.io.File
 
-class Day17 : Day {
+class `Day17-1` : Day {
     private val cubes = mutableListOf<Cube>()
     private lateinit var xDim: Dimension
     private lateinit var yDim: Dimension
@@ -122,6 +122,7 @@ class Day17 : Day {
     }
 
     override fun executePart2(): Day {
-        TODO("Not yet implemented")
+
+        return this
     }
 }
