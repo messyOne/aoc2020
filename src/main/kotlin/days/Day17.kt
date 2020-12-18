@@ -4,10 +4,19 @@ import java.io.File
 
 class Day17 : Day {
     private val cubes = mutableListOf<Cube>()
+    private lateinit var xDim: Dimension
+    private lateinit var yDim: Dimension
+    private lateinit var zDim: Dimension
 
-    data class Cube(val x: Int = 0, val y: Int = 0, val z: Int = 0, var isActive: Boolean = false) {
-        fun copy(isActive: Boolean): Cube {
-            return Cube(x, y, z, isActive)
+    data class Dimension(var min: Int = 0, var max: Int = 0) {
+        fun expand() {
+            min -= 1
+            max += 1
+        }
+    }
+    data class Cube(val x: Int = 0, val y: Int = 0, val z: Int = 0) {
+        fun copy(): Cube {
+            return Cube(x, y, z)
         }
     }
 
@@ -18,28 +27,41 @@ class Day17 : Day {
     private fun parseData() {
         var y = 0
         File("src/main/resources/data17.txt").forEachLine { line ->
-            line.forEachIndexed { i, c ->
-                cubes.add(Cube(i, y, isActive = (c == '#')))
+                xDim = Dimension(0, line.length-1)
+
+                line.forEachIndexed { i, c ->
+                    if (c == '#') {
+                        cubes.add(Cube(i, y))
+                    }
             }
             y++
         }
+        yDim = Dimension(0, y-1)
+        zDim = Dimension(0, 0)
     }
 
     private fun traverse(cubes: List<Cube>): MutableList<Cube> {
-        val expandedCubes = cubes.fold(cubes, { s, c ->
-            expand(c, s).toMutableList()
-        })
+        listOf(xDim, yDim, zDim).forEach { it.expand() }
 
         val newCubes = mutableListOf<Cube>()
 
-        expandedCubes.forEach { cube ->
-            val activeNeighbors = countActiveNeighbors(cube, expandedCubes)
+        for (z in zDim.min..zDim.max) {
+            for (y in yDim.min..yDim.max) {
+                for (x in xDim.min..xDim.max) {
+                    val maybeCube = cubes.find { cube -> cube.x == x && cube.y == y && cube.z == z}
 
-            val find = expandedCubes.find { it == cube }!!
-            if (cube.isActive) {
-                newCubes.add(find.copy(activeNeighbors == 2 || activeNeighbors == 3))
-            } else {
-                newCubes.add(find.copy(activeNeighbors == 3))
+                    val activeNeighbors = countActiveNeighbors(x, y, z, cubes.filterNot { cube -> cube.x == x && cube.y == y && cube.z == z })
+
+                    if (maybeCube != null) {
+                        if (activeNeighbors == 2 || activeNeighbors == 3) {
+                            newCubes.add(maybeCube.copy())
+                        }
+                    } else {
+                        if (activeNeighbors == 3) {
+                            newCubes.add(Cube(x, y, z))
+                        }
+                    }
+                }
             }
         }
 
@@ -66,9 +88,9 @@ class Day17 : Day {
 //                    val c = newCubes.find { it.x == x && it.y == y && it.z == z }
 //
 //                    if (c != null) {
-//                        print(if (c.isActive) '#' else '.' )
+//                        print('#')
 //                    } else {
-//                        print('X')
+//                        print('.')
 //                    }
 //                }
 //            }
@@ -76,38 +98,20 @@ class Day17 : Day {
 //            println()
 //        }
 
-        println("Part 1: " + newCubes.count { it.isActive })
+        println("Part 1: " + newCubes.size)
 
         return this
     }
 
-    private fun expand(cube: Cube, cubes: List<Cube>): List<Cube> {
-        val new = cubes.toMutableList()
-
-        for (z in (cube.z + -1)..(cube.z + 1)) {
-            for (y in (cube.y + -1)..(cube.y + 1)) {
-                for (x in (cube.x + -1)..(cube.x + 1)) {
-                    val c = cubes.find { it.x == x && it.y == y && it.z == z }
-
-                    if (c == null) {
-                        new.add(Cube(x, y, z))
-                    }
-                }
-            }
-        }
-
-        return new
-    }
-
-    private fun countActiveNeighbors(cube: Cube, cubes: List<Cube>): Int {
+    private fun countActiveNeighbors(xC: Int, yC: Int, zC: Int, cubes: List<Cube>): Int {
         var total = 0
 
-        for (z in (cube.z + -1)..(cube.z + 1)) {
-            for (y in (cube.y + -1)..(cube.y + 1)) {
-                for (x in (cube.x + -1)..(cube.x + 1)) {
+        for (z in (zC + -1)..(zC + 1)) {
+            for (y in (yC + -1)..(yC + 1)) {
+                for (x in (xC + -1)..(xC + 1)) {
                     val c = cubes.find { it.x == x && it.y == y && it.z == z }
 
-                    if (c != null && c != cube && c.isActive) {
+                    if (c != null) {
                         total += 1
                     }
                 }
