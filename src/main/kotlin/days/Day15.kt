@@ -6,12 +6,10 @@ class Day15 : Day {
     private val data = File("src/main/resources/data15.txt").useLines { it.toList() }.flatMap { s: String -> s.split(',').map { it.toInt() } }
 
 
-    override fun executePart1(): Day {
+    override fun executePart1() {
         val last = calculate(2020)
 
         println("Part 1: $last")
-
-        return this
     }
 
     private fun calculate(until: Int): Int {
@@ -45,11 +43,9 @@ class Day15 : Day {
         return last
     }
 
-    override fun executePart2(): Day {
+    override fun executePart2() {
         val last = calculate(30000000)
 
         println("Part 2: $last")
-
-        return this
     }
 }

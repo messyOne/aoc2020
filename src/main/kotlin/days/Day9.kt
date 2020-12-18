@@ -6,13 +6,11 @@ class Day9 : Day {
     private val data = File("src/main/resources/data9.txt").useLines { it.toList().map { s -> s.toLong() } }
     private val preamble = 25
 
-    override fun executePart1(): Day {
+    override fun executePart1() {
         println("Part 1: " + findWeakness())
-
-        return this
     }
 
-    override fun executePart2(): Day {
+    override fun executePart2() {
         val weakness = findWeakness()
 
         for (x in 0 until data.size-1) {
@@ -45,8 +43,6 @@ class Day9 : Day {
                 }
             }
         }
-
-        return this
     }
 
     private fun findWeakness(): Long {

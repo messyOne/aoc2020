@@ -19,10 +19,11 @@ fun main() {
         Day15(),
         Day16(),
         `Day17-1`(),
-        `Day17-2`()
-    ).forEach { it
-        .printHeader()
-        .executePart1()
-        .executePart2()
+        `Day17-2`(),
+        Day18()
+    ).forEach {
+        it.printHeader()
+        it.executePart1()
+        it.executePart2()
     }
 }

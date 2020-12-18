@@ -34,19 +34,15 @@ class Day6 : Day {
         answers.add(Answer(answerString, persons))
     }
 
-    override fun executePart1(): Day {
+    override fun executePart1() {
         println("Part 1: " + answers.map { answer -> answer.answerString.toSet() }.sumBy { set -> set.size })
-
-        return this
     }
 
-    override fun executePart2(): Day {
+    override fun executePart2() {
         val sum = answers.map { answer ->
             answer.answerString.filter { c -> answer.answerString.count { x -> x == c } == answer.persons}.length / answer.persons
         }.sum()
 
         println("Part 2: $sum")
-
-        return this
     }
 }

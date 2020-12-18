@@ -11,7 +11,7 @@ class Day11 : Day {
 
     private var data: List<List<Position>> = File("src/main/resources/data11.txt").useLines { it.toList().map { s -> s.map { c: Char -> Position(c) } } }
 
-    override fun executePart1(): Day {
+    override fun executePart1() {
 
         fun traverse(list: List<List<Position>>): Int {
             val newList = applyRulesPart1(list)
@@ -24,8 +24,6 @@ class Day11 : Day {
         }
 
         println("Part 1: " + traverse(data))
-
-        return this
     }
 
     private fun applyRulesPart1(data: List<List<Position>>): MutableList<MutableList<Position>> {
@@ -208,7 +206,7 @@ class Day11 : Day {
         return total
     }
 
-    override fun executePart2(): Day {
+    override fun executePart2() {
         fun traverse(list: List<List<Position>>): Int {
 //            list.forEach { l ->
 //                println()
@@ -226,7 +224,5 @@ class Day11 : Day {
         }
 
         println("Part 2: " + traverse(data))
-
-        return this
     }
 }

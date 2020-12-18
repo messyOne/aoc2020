@@ -59,7 +59,7 @@ class Day16 : Day {
         }
     }
 
-    override fun executePart1(): Day {
+    override fun executePart1() {
         val invalid = mutableListOf<Int>()
 
         nearby.forEach { list ->
@@ -71,11 +71,9 @@ class Day16 : Day {
         }
 
         println("Part 1: " + invalid.sum())
-
-        return this
     }
 
-    override fun executePart2(): Day {
+    override fun executePart2() {
         val allValid = nearby.filter { list ->
             list.all { i ->
                 rules.any { rule -> rule.isValid(i) }
@@ -130,7 +128,5 @@ class Day16 : Day {
         }
 
         println("Part 2: $total")
-
-        return this
     }
 }

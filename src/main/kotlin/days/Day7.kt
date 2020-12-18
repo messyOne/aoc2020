@@ -35,7 +35,7 @@ class Day7 : Day {
         }
     }
 
-    override fun executePart1(): Day {
+    override fun executePart1() {
         val lookingFor = "shiny gold"
         val found = mutableSetOf<Bag>()
 
@@ -50,11 +50,9 @@ class Day7 : Day {
         traverse(lookingFor)
 
         println("Part 1: " + found.size)
-
-        return this
     }
 
-    override fun executePart2(): Day {
+    override fun executePart2() {
         val lookingFor = "shiny gold"
 
         fun traverse(lookingFor: String): Int {
@@ -66,7 +64,5 @@ class Day7 : Day {
         val total = traverse(lookingFor) - 1 // remove the shiny gold bag itself
 
         println("Part 2: $total")
-
-        return this
     }
 }

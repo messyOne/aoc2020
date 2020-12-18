@@ -77,8 +77,7 @@ class `Day17-2` : Day {
         return newCubes
     }
 
-    override fun executePart1(): Day {
-        return this
+    override fun executePart1() {
     }
 
     private fun countActiveNeighbors(xC: Int, yC: Int, zC: Int, wC: Int, cubes: List<Cube>): Int {
@@ -101,7 +100,7 @@ class `Day17-2` : Day {
         return total
     }
 
-    override fun executePart2(): Day {
+    override fun executePart2() {
         val newCubes = (1..6).fold(cubes, { acc, _ ->
             traverse(acc)
         })
@@ -132,7 +131,5 @@ class `Day17-2` : Day {
 //        }
 
         println("Part 2: " + newCubes.size)
-
-        return this
     }
 }

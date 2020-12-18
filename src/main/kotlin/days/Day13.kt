@@ -6,7 +6,7 @@ import java.io.File
 class Day13 : Day {
     private val data = File("src/main/resources/data13.txt").useLines { it.toList() }
 
-    override fun executePart1(): Day {
+    override fun executePart1() {
         val timestamp = data.first().toInt()
         val busses = data.last().split(',').filter { s -> s != "x" }.map { it.toInt() }
 
@@ -15,14 +15,12 @@ class Day13 : Day {
             val x = timestamp / i
 
             i to (x + 1) * i - timestamp
-        }.minBy { pair -> pair.second }!!
+        }.minByOrNull { pair -> pair.second }!!
 
         println("Part 1: " + first.first * first.second)
-
-        return this
     }
 
-    override fun executePart2(): Day {
+    override fun executePart2() {
         val busses = data.last().split(',').withIndex().filter { pair -> pair.value != "x" }.map { indexedValue -> indexedValue.value.toLong() to indexedValue.index.toLong() }
 
         var t = 0L
@@ -36,7 +34,5 @@ class Day13 : Day {
         }
 
         println("Part 2: $t")
-
-        return this
     }
 }

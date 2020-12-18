@@ -11,7 +11,7 @@ class Day5 : Day {
     val MIN_COL = 0
     val MAX_COL = 7
 
-    override fun executePart1(): Day {
+    override fun executePart1() {
         var topSeat = 0
 
         data.map { line ->
@@ -23,11 +23,9 @@ class Day5 : Day {
         }
 
         println("Part 1: $topSeat")
-
-        return this
     }
 
-    override fun executePart2(): Day {
+    override fun executePart2() {
         val allSeats = (0..127*8+7).toMutableList()
 
         data.map { line ->
@@ -42,8 +40,6 @@ class Day5 : Day {
                 break
             }
         }
-
-        return this
     }
 
     private fun getSeatId(line: List<Char>): Int {

@@ -5,15 +5,13 @@ import java.io.File
 class Day3 : Day {
     private val data = File("src/main/resources/data3.txt").useLines { it.toList().map { line -> line.toList() } }
 
-    override fun executePart1(): Day {
+    override fun executePart1() {
         val counter = calculate(3, 1)
 
         println("Part 1: $counter")
-
-        return this
     }
 
-    override fun executePart2(): Day {
+    override fun executePart2() {
         val total =
                 calculate(1, 1) *
                 calculate(3, 1) *
@@ -22,8 +20,6 @@ class Day3 : Day {
                 calculate(1, 2)
 
         println("Part 2: $total")
-
-        return this
     }
 
     private fun calculate(xIncrement: Int, yIncrement: Int): Int {

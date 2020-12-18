@@ -25,20 +25,17 @@ class Day8 : Day {
         }
     }
 
-    override fun executePart1(): Day {
+    override fun executePart1() {
         while (pointer < operations.size) {
             if (handledInstructions.contains(pointer)) {
                 println("Part 1: $accumulator")
-                return this
             }
 
             executeOperations()
         }
-
-        return this
     }
 
-    override fun executePart2(): Day {
+    override fun executePart2() {
         reset()
 
         while (pointer < operations.size) {
@@ -50,8 +47,6 @@ class Day8 : Day {
         }
 
         println("Part 2: $accumulator")
-
-        return this
     }
 
     private fun tryFixingIt() {

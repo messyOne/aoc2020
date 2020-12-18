@@ -6,7 +6,7 @@ import kotlin.math.min
 class Day10 : Day {
     private val data = File("src/main/resources/data10.txt").useLines { it.toList().map { s -> s.toInt() } }.sorted()
 
-    override fun executePart1(): Day {
+    override fun executePart1() {
         var start = 0
         var jolt1 = 0
         var jolt3 = 1 // last one
@@ -21,11 +21,9 @@ class Day10 : Day {
         }
 
         println("Part 1: " + jolt1 * jolt3)
-
-        return this
     }
 
-    override fun executePart2(): Day {
+    override fun executePart2() {
         val results = mutableMapOf<Int, Long>()
         val list = listOf(0) + data + listOf(data.last()+3)
 
@@ -51,8 +49,6 @@ class Day10 : Day {
         }
 
         println("Part 2: " + traverse(0))
-
-        return this
     }
 
 }

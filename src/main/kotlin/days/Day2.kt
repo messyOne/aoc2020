@@ -15,18 +15,16 @@ class Day2 : Day {
         }
     }
 
-    override fun executePart1(): Day {
+    override fun executePart1() {
         val valid = policies.filter { policy ->
             val count = policy.input.count { policy.char.contains(it) }
             count >= policy.min && count <= policy.max
         }.count()
 
         println("Part 1: $valid")
-
-        return this
     }
 
-    override fun executePart2(): Day {
+    override fun executePart2() {
         val valid = policies.filter { policy ->
             var counter = 0
 
@@ -41,7 +39,5 @@ class Day2 : Day {
         }.count()
 
         println("Part 2: $valid")
-
-        return this
     }
 }

@@ -31,15 +31,11 @@ class Day4() : Day {
         passports.add(Passport.create(passportString))
     }
 
-    override fun executePart1(): Day {
+    override fun executePart1() {
         println("Part 1: " + passports.filter { it.isValid() }.size)
-
-        return this
     }
 
-    override fun executePart2(): Day {
+    override fun executePart2() {
         println("Part 2: " + passports.filter { it.isValidStrict() }.size)
-
-        return this
     }
 }

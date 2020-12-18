@@ -6,7 +6,7 @@ import kotlin.math.pow
 class Day14 : Day {
     private val data = File("src/main/resources/data14.txt").useLines { it.toList() }
 
-    override fun executePart1(): Day {
+    override fun executePart1() {
         var mask = ""
         val results = mutableMapOf<Int, Long>()
 
@@ -36,11 +36,9 @@ class Day14 : Day {
         }
 
         println("Part 1: " + results.values.sum())
-
-        return this
     }
 
-    override fun executePart2(): Day {
+    override fun executePart2() {
         var mask = ""
         val results = mutableMapOf<Long, Long>()
 
@@ -79,7 +77,5 @@ class Day14 : Day {
             }
         }
         println("Part 2: " + results.values.sum())
-
-        return this
     }
 }

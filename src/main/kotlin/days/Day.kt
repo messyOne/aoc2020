@@ -1,11 +1,10 @@
 package days
 
 interface Day {
-    fun printHeader(): Day {
+    fun printHeader() {
         println("\nSolutions for " + javaClass.simpleName + "\n---------------------")
-        return this
     }
 
-    fun executePart1(): Day;
-    fun executePart2(): Day;
+    fun executePart1()
+    fun executePart2()
 }
